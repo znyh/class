@@ -5,6 +5,7 @@ import "fmt"
 type P struct {
 	Name string
 }
+
 func main() {
 	q := make(chan int, 3)
 	q <- 1

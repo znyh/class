@@ -9,7 +9,7 @@ package builder
 		*不同的子struct组合，实现接口builder
 */
 
-//builder interface
+//01-builder interface
 type Builder interface {
 	SetWheels() Builder
 	SetSeats() Builder

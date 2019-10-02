@@ -1,4 +1,3 @@
-# golang     
-golang syntax          
+# golang          
 
 https://studygolang.com/pkgdoc            

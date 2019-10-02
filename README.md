@@ -34,8 +34,8 @@ https://www.bookstack.cn/read/colaly-mysql/0.md
 http://gobook.io/read/github.com/go-xorm/manual-zh-CN/       
 
 
-Beego：   
-https://beego.me/docs/intro/    
+Beego:           
+https://beego.me/docs/intro/      
 
 
 gin:   
@@ -44,23 +44,30 @@ https://blog.csdn.net/u013210620/column/info/30884
 
 
 swagger:    
-https://ieevee.com/tech/2018/04/19/go-swag.html  
+https://ieevee.com/tech/2018/04/19/go-swag.html     
 
 
 rpcx:   
 https://www.bookstack.cn/read/go-rpc-programming-guide-latest/part1.md      
 
 
-consul:   
+consul:     
 https://www.consul.io/    
 http://www.liangxiansen.cn/2017/04/06/consul/    
 https://blog.csdn.net/liuzhuchen/article/details/81913562    
 https://www.bookstack.cn/read/consul-guide/README.md      
 
-  
+Etcd:    
+https://etcd.io/docs/v3.3.12/demo/     
+
+
+ElasticSearch:                 
+https://es.xiaoleilu.com/     
+https://www.elastic.co/cn/downloads/elasticsearch      
+
 Nsq:     
 https://nsq.io/overview/quick_start.html    
-http://wiki.jikexueyuan.com/project/nsq-guide/internals.html     
+http://wiki.jikexueyuan.com/project/nsq-guide/internals.html      
  
 
 rabbitMq   
@@ -74,6 +81,6 @@ https://www.bookstack.cn/read/docker-practice/introduction-README.md
 
 
 工具安装：      
-Postman: https://www.cnblogs.com/mafly/p/postman.html     
-Goland:https://blog.csdn.net/hl_zzl/article/details/85055629#20190223_31         
-
+Postman: https://www.cnblogs.com/mafly/p/postman.html      
+Goland:https://blog.csdn.net/hl_zzl/article/details/85055629#20190223_31                
+       
