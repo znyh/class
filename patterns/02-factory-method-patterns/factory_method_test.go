@@ -7,9 +7,9 @@ import (
 )
 
 var (
-	k Kind = 1
-	m Kind = 2
-	n Kind = 3
+	k       Kind    = 1
+	m       Kind    = 2
+	n       Kind    = 3
 	balance float32 = 100.00
 )
 
@@ -29,7 +29,6 @@ func TestGeneratePayment(t *testing.T) {
 func TestCashPay_Pay(t *testing.T) {
 	payment, _ := GeneratePayment(1, balance)
 	payment.Pay(20)
-	//cash := reflect.New(reflect.TypeOf(payment).Elem()).Interface().(*CashPay)relect新的对象
 	cash := payment.(*CashPay)
 	fmt.Println(reflect.TypeOf(cash))
 	if cash.Balance != float32(80) {

@@ -3,7 +3,8 @@ package factory
 import "errors"
 
 /*
-	factory method design pattern will create object with the exact type
+	工厂方法模式:使一个类的实例化延迟到其子类, 定义一个用于创建对象的接口, 让子类决定将哪一个类实例化
+
 	设计思想：
 		*类型常量
 		*接口factory
@@ -47,7 +48,6 @@ func (credit *CreditPay) Pay(money float32) error {
 	return nil
 }
 
-//factory method pattern
 func GeneratePayment(k Kind, balance float32) (Payment, error) {
 	switch k {
 	case Cash:

@@ -9,12 +9,12 @@ import "sync"
 		2.多线程考虑线程安全，引入sync.Once
 */
 
-type singleton map[string]string
-
 var (
 	once     sync.Once
 	instance singleton
 )
+
+type singleton map[string]string
 
 func New() singleton {
 	once.Do(func() {

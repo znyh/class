@@ -17,7 +17,6 @@ func main() {
 	}
 	fmt.Println("jie")
 
-	//type sem chan struct{}
 	s := make(chan struct{}, 1)
 	select {
 	case s <- struct{}{}:
