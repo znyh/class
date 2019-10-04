@@ -29,4 +29,10 @@ func main() {
 	case m <- struct{}{}:
 		fmt.Println("struct1")
 	}
+
+	ch := make(chan int, 1)
+	select {
+	case ch <- 1:
+		fmt.Println("jie ")
+	}
 }

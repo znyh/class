@@ -11,14 +11,14 @@ func TestNoRelease(t *testing.T) {
 	sem := New(ticket, timeout)
 
 	if err := sem.Acquire(); err != nil {
-		fmt.Println(err)
+		fmt.Println("sem.Acquire()", err)
 	}
 
 	if err := sem.Release(); err != nil {
-		fmt.Println(err)
+		fmt.Println("sem.Release()_1 :", err)
 	}
 	if err := sem.Release(); err != nil {
-		fmt.Println(err)
+		fmt.Println("sem.Release()_2 :", err)
 	}
 }
 
