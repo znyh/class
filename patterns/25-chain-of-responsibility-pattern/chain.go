@@ -19,6 +19,11 @@ type Interface interface {
 	HandleEvent(event Event)
 }
 
+type Event struct {
+	Level int
+	Name  string
+}
+
 //定义ObjectA struct
 type ObjectA struct {
 	Interface
@@ -32,7 +37,7 @@ func (ob *ObjectA) SetNext(next Interface) {
 
 func (ob *ObjectA) HandleEvent(event Event) {
 	if ob.Level == event.Level {
-		fmt.Printf("%s 处理这个事件 %s\n", ob.Name, event.Name)
+		fmt.Printf("%s 处理事件event: %+v\n", ob.Name, event)
 	} else {
 		if ob.Interface != nil {
 			ob.Interface.HandleEvent(event)
@@ -55,7 +60,7 @@ func (ob *ObjectB) SetNext(next Interface) {
 
 func (ob *ObjectB) HandleEvent(event Event) {
 	if ob.Level == event.Level {
-		fmt.Printf("%s 处理这个事件 %s\n", ob.Name, event.Name)
+		fmt.Printf("%s 处理事件event: %+v\n", ob.Name, event)
 	} else {
 		if ob.Interface != nil {
 			ob.Interface.HandleEvent(event)
@@ -63,9 +68,4 @@ func (ob *ObjectB) HandleEvent(event Event) {
 			fmt.Println("无法处理")
 		}
 	}
-}
-
-type Event struct {
-	Level int
-	Name  string
 }
