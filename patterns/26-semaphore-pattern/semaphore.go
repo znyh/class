@@ -30,6 +30,13 @@ type Semaphore struct {
 	timeout time.Duration
 }
 
+func New(tickets int, timeout time.Duration) Interface {
+	return &Semaphore{
+		sem:     make(chan struct{}, tickets),
+		timeout: timeout,
+	}
+}
+
 func (s *Semaphore) Acquire() error {
 	select {
 	case s.sem <- struct{}{}:
@@ -45,12 +52,5 @@ func (s *Semaphore) Release() error {
 		return nil
 	case <-time.After(s.timeout):
 		return ErrIllegalRelease
-	}
-}
-
-func New(tickets int, timeout time.Duration) Interface {
-	return &Semaphore{
-		sem:     make(chan struct{}, tickets),
-		timeout: timeout,
 	}
 }

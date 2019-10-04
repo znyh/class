@@ -55,10 +55,13 @@ func NewIterator() *Iterator {
 	}
 }
 
-func (i *Iterator) Next() Visitor {
-	fmt.Println(i.index)
-	visitor := i.list[i.index]
-	i.index += 1
+func (it *Iterator) Next() Visitor {
+	if !it.HasNext() {
+		return nil
+	}
+	fmt.Println(it.index)
+	visitor := it.list[it.index]
+	it.index += 1
 	return visitor
 }
 

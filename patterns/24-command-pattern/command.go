@@ -4,14 +4,6 @@ import "fmt"
 
 /*
 	命令模式是一种数据驱动模式，将请求封装成一个对象，从而可以用不同的请求对客户进行参数化，实现调用者和接收者的解藕
-
-	设计思想：
-		*接收者(Receiver): 执行请求相关的操作Execute()
-		*调用者(Invoker):
-		*命令接口(Command)
-		*具体命令的结构体(ConcreteCommand)
-	Invoker负责维护Command队列
-	ConcreteCommand匿名组合Receiver
 */
 
 /*创建Receiver, 这里使用接口，为了实现多个receiver。(可以创建Receiver struct)*/

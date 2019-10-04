@@ -59,9 +59,6 @@ func (share *ShareNotifier) Register(observer Observer) {
 }
 
 func (share *ShareNotifier) Remove(observer Observer) {
-	if len(share.obList) == 0 {
-		return
-	}
 	for i, ob := range share.obList {
 		if ob == observer {
 			share.obList = append(share.obList[:i], share.obList[i+1:]...)

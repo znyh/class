@@ -55,6 +55,9 @@ func (container *ElementContainer) Add(element IElement) {
 }
 
 func (container *ElementContainer) Delete(element IElement) {
+	if len(container.list) <= 0 {
+		return
+	}
 	for i, val := range container.list {
 		if val == element {
 			container.list = append(container.list[:i], container.list[i+1:]...)

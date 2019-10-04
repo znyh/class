@@ -16,15 +16,6 @@ type Expression interface {
 	Interpret() bool
 }
 
-/*创建context结构， 用作需要解释的上下文信息*/
-type Context struct {
-	val string
-}
-
-func (con *Context) GetVal() string {
-	return con.val
-}
-
 /*创建ConcreteExpression*/
 //Equal表达式类
 type Equal struct {
@@ -44,6 +35,15 @@ type Contain struct {
 
 func (con *Contain) Interpret() bool {
 	return strings.Contains(con.left.GetVal(), con.right.GetVal())
+}
+
+/*创建context结构， 用作需要解释的上下文信息*/
+type Context struct {
+	val string
+}
+
+func (con *Context) GetVal() string {
+	return con.val
 }
 
 func CreateExpression(kind string, left, right Context) Expression {

@@ -2,12 +2,12 @@ package visitor
 
 import "testing"
 
-func TestElementA_Accept(t *testing.T) {
-	elementA := &Element{}
+func TestElement_Accept(t *testing.T) {
+	element := &Element{}
 	visitorA := &ConcreteVisitorA{Name: "lee"}
 	visitorB := &ConcreteVisitorB{Name: "anne"}
-	elementA.Accept(visitorA)
-	elementA.Accept(visitorB)
+	element.Accept(visitorA)
+	element.Accept(visitorB)
 }
 
 func TestElementContainer_Add(t *testing.T) {
