@@ -8,6 +8,8 @@ https://www.kancloud.cn/liupengjie/go/570005
 golang:
 https://studygolang.com/pkgdoc     
 
+patterns:             
+https://design-patterns.readthedocs.io/zh_CN/latest/index.html      
 
 Linux：     
 https://www.bookstack.cn/read/Conquer-Linux/README.md      
