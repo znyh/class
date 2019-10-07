@@ -60,7 +60,8 @@ https://blog.csdn.net/liuzhuchen/article/details/81913562
 https://www.bookstack.cn/read/consul-guide/README.md      
 
 Etcd:    
-https://etcd.io/docs/v3.3.12/demo/     
+https://etcd.io/docs/v3.4.0/        
+https://godoc.org/github.com/coreos/etcd/clientv3          
 
 
 ElasticSearch:                 

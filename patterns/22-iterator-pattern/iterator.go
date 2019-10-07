@@ -37,7 +37,7 @@ func (c *Container) Add(visitor Visitor) {
 }
 
 func (c *Container) Remove(index int) {
-	if index < 0 || index > len(c.list) {
+	if index < 0 || index >= len(c.list) {
 		return
 	}
 	c.list = append(c.list[:index], c.list[index+1:]...)
