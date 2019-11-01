@@ -85,5 +85,6 @@ https://www.bookstack.cn/read/docker-practice/introduction-README.md
 
 工具安装：      
 Postman: https://www.cnblogs.com/mafly/p/postman.html      
-Goland:https://blog.csdn.net/hl_zzl/article/details/85055629#20190223_31                
+Goland:https://blog.csdn.net/hl_zzl/article/details/85055629#20190223_31      
+Goland:https://blog.csdn.net/daimading/article/details/88816827                       
        
