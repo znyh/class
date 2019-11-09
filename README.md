@@ -31,7 +31,7 @@ http://gobook.io/read/github.com/go-xorm/manual-zh-CN/
  
 
 xrom:   
-
+https://www.kancloud.cn/xormplus/xorm/167077
 
 
 Docker:     
