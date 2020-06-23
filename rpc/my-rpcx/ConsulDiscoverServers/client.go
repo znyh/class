@@ -14,7 +14,7 @@ func main() {
 
 	var (
 		consulAddr = flag.String("consulAddr", "localhost:8500", "consul address")
-		basePath   = flag.String("base", "/rpcx_test/Arith", "prefix path")
+		basePath   = flag.String("util", "/rpcx_test/Arith", "prefix path")
 	)
 
 	d := client.NewConsulDiscovery(*basePath, "", []string{*consulAddr}, nil)

@@ -14,7 +14,7 @@ func main() {
 
 	var (
 		etcdAddr = flag.String("consulAddr", "localhost:2379", "eetcd address")
-		basePath = flag.String("base", "/rpcx_test", "prefix path")
+		basePath = flag.String("util", "/rpcx_test", "prefix path")
 	)
 
 	d := client.NewEtcdDiscovery(*basePath, "Arith", []string{*etcdAddr}, nil)

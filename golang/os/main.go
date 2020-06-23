@@ -8,9 +8,9 @@ import (
 )
 
 func main() {
-	f, err := os.OpenFile("./test.log", os.O_CREATE|os.O_APPEND, 0666)
+	f, err := os.OpenFile("./example.log", os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
-		log.Fatal("open test.log err")
+		log.Fatal("open example.log err")
 
 	}
 	defer f.Close()
@@ -25,14 +25,14 @@ func main() {
 	f.WriteString("我是一个好人\n")
 
 	//读取
-	if data, err := ioutil.ReadFile("./test.log"); err != nil {
+	if data, err := ioutil.ReadFile("./example.log"); err != nil {
 		log.Fatal("ioutil readall fail")
 	} else {
 		fmt.Println(string(data))
 	}
 
 	//写入2
-	// err = ioutil.WriteFile("./test.log", []byte("这是一个测试文件!!\n"), os.ModeAppend)
+	// err = ioutil.WriteFile("./example.log", []byte("这是一个测试文件!!\n"), os.ModeAppend)
 	// if err != nil {
 	// 	log.Fatal("ioutil writeto file err")
 	// }

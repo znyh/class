@@ -17,7 +17,7 @@ import (
 var (
 	addr     = flag.String("addr", "localhost:9999", "server address")
 	etcdAddr = flag.String("consulAddr", "localhost:2379", "eetcd address")
-	basePath = flag.String("base", "/rpcx_test", "prefix path")
+	basePath = flag.String("util", "/rpcx_test", "prefix path")
 )
 
 type Arith struct {

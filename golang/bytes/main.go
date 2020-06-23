@@ -22,7 +22,7 @@ func main2() {
 	bs := []byte(nil)
 	bf := bytes.NewBuffer(bs)
 
-	f, err := os.OpenFile("./test.log", os.O_APPEND|os.O_CREATE, 0666)
+	f, err := os.OpenFile("./example.log", os.O_APPEND|os.O_CREATE, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
