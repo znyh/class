@@ -9,7 +9,6 @@ import (
 )
 
 var (
-	redisDB   = flag.Int("redisDB", 1, "redis db")
 	redisAddr = flag.String("redisAddr", "localhost:6379", "redis listen addr")
 
 	c redis.Conn
@@ -29,7 +28,7 @@ func main() {
 
 	initRedis(*redisAddr)
 
-	c.Do("FLUSHDB")
+	_, _ = c.Do("FLUSHDB")
 
 	mylist()
 }
