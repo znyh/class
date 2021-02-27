@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package student;
+
+// 用户信息
+message StudentInfo {
+  uint64 UserID = 1;
+  string Name = 2;
+  int64 Age = 3;
+  int64 Sex  = 4;
+  uint64 Gold = 5;
+  uint64 Score = 6;
+}

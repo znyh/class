@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package pbArith;
+
+
+service Arith {
+    rpc SayHello(ArithReq) returns(ArithRsp){}
+}
+
+message ArithReq {
+    int32 Id = 1;
+}
+
+message ArithRsp {
+    int32 Id = 1;
+    string Msg = 2;
+}
+

@@ -1,0 +1,229 @@
+5833985D4E32
+
+yum ：
+yum repolist all            	列出所有仓库
+yum list all                    列出仓库中所有软件包
+yum info 软件包           		查看软件包信息
+yum -y install 软件包        	安装软件包
+yum -y reinstall 软件包    		重装软件包
+yum -y update 软件包      		升级软件包
+yum -y remove 软件包      		卸载软件包
+yum clean alla              	清除所有仓库的缓冲
+
+
+rpm：
+rpm -ivh 包全名                安装
+rpm -Uvh 包全名                升级
+rpm -e 包全名                  卸载
+rpm -q 包全名                  查询包是否安装
+rpm -qa                        查询已经安装的rpm包
+rpm -qf 文件名                 查询文件名对应的rpm包
+
+
+
+源码包的安装
+查询安装包的大小：du -sh go
+安装配置：./configure --prefix = /usr/local/qq
+
+
+
+
+man ：
+/关建字                         从上至下搜索关键字
+？关建字                        从下至上搜索关建字
+n  下一个、 N  上一个
+
+
+echo ：
+echo $HOSTNAME       		查看本机主机名
+echo $SHELL                 查看shell变量的值
+
+
+date "+%Y-%M-%D %H:%M:%M"        查看系统时间
+date -s “20150901 8:30:00”       设置系统时间
+
+
+
+who、last、free -m 、history -c（清空历史命令）、cat -n（显示行号）、more、head、tail 、 diff
+useradd 用户名 、 passwd  用户名 、 userdel -rf 用户名 、groupadd 群组名
+touch -d "3 days ago" test.go
+
+
+tar:
+打包并压缩文件：  tar -czvf 压缩包名.tar.gz 文件名
+解压并展开文件：  tar -xzvf 压缩包名.tar.gz -C /usr/local
+
+
+grep、find:
+grep hello./test.go1>>ttt.go // grep 关建字 文件
+find /home/go /src/zyh-mj/ -name *.go -print // find  查找路径 寻找条件  操作    (用于文件查询)
+-cmin 、-mmin、-exec ls -a {} \；
+-a ， -o
+-
+type
+： f，d，l
+-size  ： + ， -
+
+
+
+PATH = $PATH:/root/bin
+export 将局部变量转成全局变量
+
+
+shell脚本：
+脚本声明 #!/bin/bash ，  注释信息 # ， 可执行语句或命令
+带参数的shell script ：
+$0：当前脚本名称 ， $1-$# ：用户参数
+
+
+
+用户管理：
+管理文件: passwd，shadow，group，gshadow
+邮箱文件: /var/spool/mail
+useradd、passwd、usermod、change、userdel、su
+
+默认设置文件：/etc/default/useradd、/etc/login.defs
+
+
+vim替换:%s/YouMeek/Judasn/g ，把文件中所有 YouMeek 替换为：Judasn
+:%s/YouMeek/Judasn/ ，把文件中所有行中第一个 YouMeek 替换为：Judasn:s/YouMeek/Judasn/ ，把光标当前行第一个 YouMeek 替换为 Judasn:s/YouMeek/Judasn/g ，把光标当前行所有 YouMeek 替换为 Judasn
+
+
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+
+
+
+ifconfg eth0:0 192.168.232.133 //配置虚拟网卡
+ifconfg eth0:0 down            //删除eth0:0
+hostname 主机名 			   //查看或修改主机名
+ifup           网卡名称
+ifdown      网卡名称
+
+
+/etc/sysconfig/network-scripts/ifcfg-eth0 //ip配置文件
+/etc/sysconfig/network                    //主机名配置文件
+/etc/resolv.conf 						  //DNS配置文件
+
+IPADDR = 192.168.232.133
+GATEWAY = 192.168.232.2
+DNS1 =192.168.232.2
+
+
+netstat -tuln 			//查看端口
+netstat -an
+netstat -rn 			//查看路由表，网关
+route -n    			//查看路由表，网关
+nslookup           		//域名服务器解析 、查看域名ip
+traceroute -n ip地址 	//路由追踪
+wget
+
+service network restart
+
+dig www.baidu.com
+
+dhcp：动态主机ip配置协议
+yum -y install dhcp
+vim /etc/dhcp/dhcp.conf //dhcp配置文件
+service dhcpd restart
+
+
+
+防火墙 ：
+iptables -L
+iptables -F
+iptables -Z
+iptables -X
+
+tcpdump -i eth0 -nnX port 21                //tcp抓包
+
+/etc/ssh/sshd_conf
+/etc/ssh/ssh_conf
+
+ssh root@192.168.232.134
+scp root@192.168.232.134：/etc/resolv.conf  /tmp/resove1.conf 	//下载
+scp -r  /tmp/go root@192.168.232.134：/tmp/go 					//上传
+sftp root@192.168.232.134 										//文件传输
+
+vsftpd：
+/etc/vsftpd/vsftpd.conf 			//配置文件
+/etc/vsftpd/ftpusers 				// ftp黑名单
+/etc/vsftpd/user_list               // ftp黑名单
+
+ftp  192.168.232.134
+ftp: //zzyh@192.168.232.134
+
+anonymous_enable 		//匿名用户访问
+anon_upload_enable      //匿名用户上传
+anon_mkdir_write_enable //允许匿名用户建立目录
+anon_umask              //设置上传的文件默认权限
+
+匿名用户ftp设置：anonymous
+
+本地用户ftp设置：
+local_enable = YES
+write_enable = YES
+local_umask = 022
+
+userlist_enable = YES
+userlist_deny =YES //修改为NO ，则user_list为白名单
+userlist_file = /etc/vsftpd/user_list
+
+
+
+
+
+host、nslookup   + 域名 //查询域名所对应的ip地址
+host    www.baidu.com
+nslookup   www.baidu.com
+
+
+
+
+
+
+
+
+samba 服务：
+
+samba        //主服务包
+samba-client //客户端
+samba-common //通用工具
+samba4-libs  //库
+samba-winbind //windows域映射
+samba-winbing-clients
+
+
+守护进程： smb、nmb, 端口 137/138/139/445
+service smb start
+service nmb start
+
+
+cat smb.conf | grep -v "^#"
+cat smb.conf | grep -v "^#" | grep -v "^;"
+
+vim /etc/selinux/config //关闭selinux
+sestatus                //查询selinux状态
+
+服务：         默认安装路径 /usr/local
+chkconfig --list //查看系统所有的安装服务（rpm包）
+
+rpm 包：
+1.独立服务  ： 启动脚本：/etc/init.d/   、   配置文件位置 /etc/sysconfig/、
+2.xinetd服务:  启动脚本：/etc/xinetd.d、   配置文件位置 /etc/xinetd.conf/、
+/var/lib/:服务产生的数据放入这里
+/var/log/:日志
+
+
+service --status-all
+chkconfig vsftpd on
+/etc/rc.d/rc.local
+ln -s /usr/local/apache/bin/apachectl /etc/init.d/apache
+
+
+
+
+ps aux
+ps -le
+pstree -p
+kill -9 100001

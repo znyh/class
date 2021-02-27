@@ -1,0 +1,10 @@
+
+
+[Game]
+    ID = "APPID_GAME"
+    Addr =  "127.0.0.1:3306"
+
+[Room]
+    RoomCnt = 10
+    MaxCap  = 20
+

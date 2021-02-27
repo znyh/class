@@ -1,0 +1,197 @@
+﻿
+http://localhost:8080/swagger/index.html
+
+centos7
+
+安装： 
+yum install -y unzip wget tree net-tools bind-utils tree sysstat vim-en* lrzsz NetworkManager-tui ntp ntpdate iftoptcpdump telnet traceroute gcc gcc-c++ pcre pcre-devel zlib zlib-devel 
+yum install -y curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils-MakeMaker lrzsz epel-release gcc-c++ tcl ca-certificates unzip openssl openssl-devel
+
+chmod +x /etc/rc.d/rc.local   #对于启动脚本的存放位置，增加/etc/rc.d/rc.local的权限
+echo "systemctl restart mongod.service" >> /etc/rc.local  //自启动
+
+systemctl 的用法
+
+systemctl enable iptables.service #开机运行服务
+systemctl disable iptables.service #取消开机运行
+systemctl start iptables.service #启动服务
+systemctl stop iptables.service #停止服务
+systemctl restart iptables.service #重启服务
+systemctl reload iptables.service #重新加载服务配置文件
+systemctl status iptables.service #查询服务运行状态
+systemctl --failed #显示启动失败的服务
+systemctl list-units --type=service #查看所有服务
+systemctl is-enabled httpd #查看httpd服务是否开机启动
+
+
+开放端口
+firewall-cmd --list-all
+firewall-cmd --zone=public --add-port=8883/tcp --permanent
+
+netstat -ano | findstr 8080 
+taskkill /F /PID 107813
+
+scp root@192.168.232.134：/etc/resolv.conf  /tmp/resove1.conf                        //下载
+scp -r  /tmp/go root@192.168.232.134：/tmp/go                                               //上传
+
+go安装：
+1. golang 1.12.5 下载及安装
+mkdir /usr/download
+cd /usr/download
+wget https://studygolang.com/dl/golang/go1.12.5.linux-amd64.tar.gz
+tar -zxvf go1.12.5.linux-amd64.tar.gz
+2.添加环境变量和设置go代理
+vim /etc/profile
+export GOOS=linux
+export GOARCH=amd64
+export GOROOT=/usr/download/go     #安装目录
+export GOPATH=/home/go            #工作目录
+export GOPROXY=https://goproxy.io    #设置go代理
+export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin
+
+source /etc/profile
+
+
+redis安装：
+yum install -y epel-release
+yum install -y redis
+vim /etc/redis.conf --bind 0.0.0.0
+-->redis-cli.exe -h 127.0.0.1 -p 6379
+
+mongodb安装：
+1.新建文件mongodb-org-4.0.repo：
+vim  /etc/selinux/config                                  //把 SELINUX=enforcing 改为 SELINUX=disabled
+yum erase $(rpm -qa | grep mongodb-org)    //卸载旧版本
+vim  /etc/yum.repos.d/mongodb-org-4.0.repo  //新建文件
+2.输入以下内容：
+[mongodb-org-4.0]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.0/x86_64/
+gpgcheck=0
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc
+3.安装mongodb数据库：
+sudo yum install -y mongodb-org
+4.修改配置配置：
+vim /etc/mongod.conf        //编辑配置文件
+bindIp:127.0.0.1                  //注释此行 或 改为bindIp:0.0.0.0
+systemctl restart mongod   //重启服务：       
+systemctl enable mongod   //自启动
+-->mongo 127.0.0.1:27017
+
+
+
+mysql安装：
+rpm -ivh http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
+yum install -y mysql-community-server
+systemctl start mysqld
+systemctl enable mysqld   
+cat /var/log/mysqld.log |grep password  #查看初始化密码
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'root.123';   #设置初始化密码
+
+use mysql;
+SHOW VARIABLES LIKE 'validate_password%';
+set global validate_password_policy=LOW;
+set global validate_password_length=4; 
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
+//grant all privileges on *.* to 'root'@'%'  identified by 'root' ;   #开放mysql端口
+
+
+
+
+consul安装：
+wget https://releases.hashicorp.com/consul/1.3.0/consul_1.3.0_linux_amd64.zip
+unzip consul_1.3.0_linux_amd64.zip
+mv consul /usr/local/bin/
+
+
+etcd安装：
+yum install -y etcd
+
+
+git安装：
+yum remove git
+wget https://www.kernel.org/pub/software/scm/git/git-2.0.5.tar.gz
+tar xzf git-2.0.5.tar.gz
+cd git-2.0.5
+make prefix=/usr/local/git all
+make prefix=/usr/local/git install
+echo "export PATH=$PATH:/usr/local/git/bin" >> /etc/bashrc
+source /etc/bashrc
+
+
+
+
+nginx安装：
+rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+yum install -y nginx
+systemctl start nginx.service 
+systemctl enable nginx.service // 加入开机启动
+
+
+
+jdk安装：
+tar -zxvf jdk-8u131-linux-x64.tar.gz 
+export JAVA_HOME=/usr/download/jdk1.8.0_131
+export CLASSPATH=$JAVA_HOME/lib/
+export PATH=$PATH:$JAVA_HOME/bin
+
+
+jenkins安装：
+wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+java -jar jenkins.war --httpPort=8080                         #运行jenkins
+cat /root/.jenkins/secrets/initialAdminPassword          #查看jenkins密码
+
+
+rabbitmq安装：[ 15672 ]
+https://www.rabbitmq.com/clustering.html    #集群安装网址 
+yum install -y epel-release
+yum install -y erlang
+yum install -y rabbitmq-server
+systemctl start rabbitmq-server
+systemctl enable rabbitmq-server
+rabbitmq-plugins enable rabbitmq_management
+
+//添加用户
+rabbitmqctl add_user root root
+rabbitmqctl set_user_tags root administrator
+
+//rabbitmq登录
+rabbitmq-server -detached
+
+
+supervisor安装：
+yum install epel-release
+yum install -y supervisor
+systemctl enable supervisord   # 开机自启动# 
+systemctl start supervisord      # 启动supervisord服务#
+systemctl status supervisord    # 查看supervisord服务状态
+supervisorctl reload
+supervisorctl status
+
+
+
+
+nsq:
+nsqlookupd
+nsqd --lookupd-tcp-address=127.0.0.1:4160
+nsqadmin --lookupd-http-address=127.0.0.1:4161
+
+
+
+docker安装：
+https://www.runoob.com/docker/centos-docker-install.html
+
+
+
+
+服务器免密登录：
+cd ~
+ssh-keygen -t rsa 
+cd .ssh/
+ssh-copy-id -i /root/.ssh/id_rsa.pub root@192.168.131.139
+
+
+
+
