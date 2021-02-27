@@ -4,13 +4,15 @@
 package di
 
 import (
+	"class/ztest/redis/zsimple/internal/dao"
+	"class/ztest/redis/zsimple/internal/server/grpc"
+	"class/ztest/redis/zsimple/internal/server/http"
+	"class/ztest/redis/zsimple/internal/service"
+
 	"github.com/google/wire"
-	"github.com/znyh/class/ztest/redis/zsimple/internal/dao"
-	"github.com/znyh/class/ztest/redis/zsimple/internal/server/grpc"
-	"github.com/znyh/class/ztest/redis/zsimple/internal/service"
 )
 
 //go:generate kratos t wire
 func InitApp() (*App, func(), error) {
-	panic(wire.Build(dao.Provider, service.Provider, grpc.New2, NewApp))
+	panic(wire.Build(dao.Provider, service.Provider, http.New, grpc.New, NewApp))
 }

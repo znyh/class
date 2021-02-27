@@ -1,3 +1,3 @@
-module github.com/znyh/class/ztool
+module class/ztool
 
 go 1.13

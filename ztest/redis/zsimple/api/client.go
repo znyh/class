@@ -1,4 +1,5 @@
 package api
+
 import (
 	"context"
 	"fmt"
@@ -23,8 +24,3 @@ func NewClient(cfg *warden.ClientConfig, opts ...grpc.DialOption) (DemoClient, e
 
 // 生成 gRPC 代码
 //go:generate kratos tool protoc --grpc --bm  --ecode --swagger api.proto
-
-
-
-
-

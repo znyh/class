@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/znyh/class/ztest/golang2/pub-sub/pubsub"
+	"class/ztest/golang2/pub-sub/pubsub"
 )
 
 func main() {

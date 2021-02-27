@@ -6,15 +6,15 @@ import (
 	"log"
 	"net"
 
-	pbArith "github.com/znyh/class/ztest/rpc/my-grpc/proto"
+	pb "class/ztest/rpc/my-grpc/api"
 
 	"google.golang.org/grpc"
 )
 
-type arith int
+type service int
 
-func (c *arith) SayHello(ctx context.Context, req *pbArith.ArithReq) (*pbArith.ArithRsp, error) {
-	rsp := &pbArith.ArithRsp{
+func (c *service) SayHello(ctx context.Context, req *pb.HelloReq) (*pb.HelloRsp, error) {
+	rsp := &pb.HelloRsp{
 		Id:  req.Id,
 		Msg: "say hello",
 	}
@@ -29,6 +29,6 @@ func main() {
 	}
 	fmt.Println("rpc服务器开始监听：", ":9999")
 	s := grpc.NewServer()
-	pbArith.RegisterArithServer(s, new(arith))
+	pb.RegisterHelloServer(s, new(service))
 	log.Fatal(s.Serve(l))
 }

@@ -6,9 +6,10 @@
 package di
 
 import (
-	"github.com/znyh/class/ztest/redis/zsimple/internal/dao"
-	"github.com/znyh/class/ztest/redis/zsimple/internal/server/grpc"
-	"github.com/znyh/class/ztest/redis/zsimple/internal/service"
+	"class/ztest/redis/zsimple/internal/dao"
+	"class/ztest/redis/zsimple/internal/server/grpc"
+	"class/ztest/redis/zsimple/internal/server/http"
+	"class/ztest/redis/zsimple/internal/service"
 )
 
 // Injectors from wire.go:
@@ -30,14 +31,21 @@ func InitApp() (*App, func(), error) {
 		cleanup()
 		return nil, nil, err
 	}
-	server, err := grpc.New2(serviceService)
+	engine, err := http.New(serviceService)
 	if err != nil {
 		cleanup3()
 		cleanup2()
 		cleanup()
 		return nil, nil, err
 	}
-	app, cleanup4, err := NewApp(serviceService, server)
+	server, err := grpc.New(serviceService)
+	if err != nil {
+		cleanup3()
+		cleanup2()
+		cleanup()
+		return nil, nil, err
+	}
+	app, cleanup4, err := NewApp(serviceService, engine, server)
 	if err != nil {
 		cleanup3()
 		cleanup2()

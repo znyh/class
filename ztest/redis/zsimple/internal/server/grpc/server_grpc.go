@@ -10,6 +10,9 @@ import (
 	"sync"
 	"time"
 
+	pb "class/ztest/redis/zsimple/api"
+
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
 	"github.com/go-kratos/kratos/pkg/ecode"
 	"github.com/go-kratos/kratos/pkg/log"
 	nmd "github.com/go-kratos/kratos/pkg/net/metadata"
@@ -39,6 +42,23 @@ type ServerConfig struct {
 	Network string         `dsn:"network"`
 	Addr    string         `dsn:"address"`
 	Timeout xtime.Duration `dsn:"query.timeout"`
+}
+
+func New2(svc pb.DemoServer) (gs *Server, err error) {
+	var (
+		cfg ServerConfig
+		ct  paladin.TOML
+	)
+	if err = paladin.Get("grpc.toml").Unmarshal(&ct); err != nil {
+		return
+	}
+	if err = ct.Get("Server").UnmarshalTOML(&cfg); err != nil {
+		return
+	}
+	gs = NewServer(&cfg)
+	pb.RegisterDemoServer(gs.server, svc)
+	gs, err = gs.Start()
+	return
 }
 
 func NewServer(conf *ServerConfig, opt ...grpc.ServerOption) (s *Server) {

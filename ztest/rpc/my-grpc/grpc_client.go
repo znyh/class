@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	pbArith "github.com/znyh/class/ztest/rpc/my-grpc/proto"
+	pb "class/ztest/rpc/my-grpc/api"
 
 	"google.golang.org/grpc"
 )
@@ -17,10 +17,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	req := pbArith.ArithReq{
+	req := pb.HelloReq{
 		Id: 10001,
 	}
-	c := pbArith.NewArithClient(conn)
+	c := pb.NewHelloClient(conn)
 	rsp, err := c.SayHello(context.TODO(), &req)
 	if err != nil {
 		log.Fatal(err)

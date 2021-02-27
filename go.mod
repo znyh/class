@@ -1,3 +1,3 @@
-module github.com/znyh/class
+module class
 
 go 1.13

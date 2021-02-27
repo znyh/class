@@ -4,7 +4,10 @@ import (
 	"sync"
 	"time"
 
+	pb "class/ztest/redis/zsimple/api"
+
 	"github.com/gin-gonic/gin"
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
 	xtime "github.com/go-kratos/kratos/pkg/time"
 	"google.golang.org/grpc"
 )
@@ -24,6 +27,24 @@ type ServerConfig struct {
 	ReadTimeout  xtime.Duration `dsn:"query.readTimeout"`
 	WriteTimeout xtime.Duration `dsn:"query.writeTimeout"`
 }
+
+func New2(svc pb.DemoServer) (h *Server, err error) {
+	var (
+		cfg ServerConfig
+		ct  paladin.TOML
+	)
+	if err = paladin.Get("http.toml").Unmarshal(&ct); err != nil {
+		return
+	}
+	if err = ct.Get("Server").UnmarshalTOML(&cfg); err != nil {
+		return
+	}
+	h = NewServer(&cfg)
+	h, err = h.Start()
+	return
+}
+
+func RegisterBMDemoServer() {}
 
 func NewServer(conf *ServerConfig) (s *Server) {
 	s = new(Server)

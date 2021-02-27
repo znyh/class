@@ -5,21 +5,21 @@ import (
 	"log"
 	"net/rpc"
 
-	"github.com/znyh/class/ztest/rpc/my-rpc/pb"
+	pb "class/ztest/rpc/my-rpc/api"
 )
 
 func main() {
 	conn, err := rpc.DialHTTP("tcp", ":9990")
 	if err != nil {
-		log.Fatalln("dailing error: ", err)
+		log.Fatalln("DialHTTP error: ", err)
 	}
 
-	req := pb.ArithRequest{10, 5}
-	var res pb.ArithResponse
+	req := pb.HelloRequest{A: 10, B: 5}
+	var res pb.HelloResponse
 
-	err = conn.Call("Arith.Calu", req, &res)
+	err = conn.Call("Hello.Calc", req, &res)
 	if err != nil {
-		log.Fatalln("Arith.Calu error: ", err)
+		log.Fatalln("Hello.Calc error: ", err)
 	}
 	fmt.Printf("req:%+v,rep:%+v", req, res)
 }

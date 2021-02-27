@@ -7,9 +7,10 @@ import (
 	"syscall"
 	"time"
 
+	"class/ztest/redis/zsimple/internal/di"
+
 	"github.com/go-kratos/kratos/pkg/conf/paladin"
 	"github.com/go-kratos/kratos/pkg/log"
-	"github.com/znyh/class/ztest/redis/zsimple/internal/di"
 )
 
 func main() {
