@@ -7,6 +7,7 @@ package di
 
 import (
 	"github.com/znyh/class/ztest/redis/zsimple/internal/dao"
+	"github.com/znyh/class/ztest/redis/zsimple/internal/server/grpc"
 	"github.com/znyh/class/ztest/redis/zsimple/internal/service"
 )
 
@@ -29,7 +30,14 @@ func InitApp() (*App, func(), error) {
 		cleanup()
 		return nil, nil, err
 	}
-	app, cleanup4, err := NewApp(serviceService)
+	server, err := grpc.New2(serviceService)
+	if err != nil {
+		cleanup3()
+		cleanup2()
+		cleanup()
+		return nil, nil, err
+	}
+	app, cleanup4, err := NewApp(serviceService, server)
 	if err != nil {
 		cleanup3()
 		cleanup2()

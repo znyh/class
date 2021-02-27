@@ -1,0 +1,42 @@
+package grpc
+
+import (
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
+	"github.com/go-kratos/kratos/pkg/net/rpc/warden"
+	pb "github.com/znyh/class/ztest/redis/zsimple/api"
+)
+
+// New new a grpc server.
+func New(svc pb.DemoServer) (ws *warden.Server, err error) {
+	var (
+		cfg warden.ServerConfig
+		ct  paladin.TOML
+	)
+	if err = paladin.Get("grpc.toml").Unmarshal(&ct); err != nil {
+		return
+	}
+	if err = ct.Get("Server").UnmarshalTOML(&cfg); err != nil {
+		return
+	}
+	ws = warden.NewServer(&cfg)
+	pb.RegisterDemoServer(ws.Server(), svc)
+	ws, err = ws.Start()
+	return
+}
+
+func New2(svc pb.DemoServer) (gs *Server, err error) {
+	var (
+		cfg ServerConfig
+		ct  paladin.TOML
+	)
+	if err = paladin.Get("grpc.toml").Unmarshal(&ct); err != nil {
+		return
+	}
+	if err = ct.Get("Server").UnmarshalTOML(&cfg); err != nil {
+		return
+	}
+	gs = NewServer(&cfg)
+	pb.RegisterDemoServer(gs.server, svc)
+	gs, err = gs.Start()
+	return
+}
