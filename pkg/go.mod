@@ -1,4 +1,4 @@
-module class/ztest
+module class/pkg
 
 go 1.13
 
