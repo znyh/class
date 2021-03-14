@@ -1,6 +1,7 @@
 package dfs
 
 import (
+	"fmt"
 	"testing"
 	"time"
 
@@ -9,60 +10,85 @@ import (
 
 func TestPermute(t *testing.T) {
 	var (
-		_arr    = []int32(nil)
-		_num    = 2  //2个dice
-		_maxCnt = 15 //15个chess
+		start   = time.Now()
+		_rows   = []int32(nil)
+		_dices  = []int32{-1, -2} //2个色子
+		_maxCnt = 2               //15个chess
 	)
 
 	for i := int32(1); i <= int32(_maxCnt); i++ {
-		_arr = append(_arr, i)
+		_rows = append(_rows, i)
 	}
-	start := time.Now()
-	ret := Permute(_arr, _num)
-	log.Info("use time: %v", time.Since(start).Milliseconds())
-	log.Info("hello world, cnt:%+v _num:%+v \n%v", len(ret), _num, ret)
+
+	ret := Permute(_rows, _dices)
+
+	str := "\n"
+	for _, v := range ret {
+		if len(v) == 2 {
+			str += fmt.Sprintf("{Row:%d->%d}\n", v[0], v[1])
+		} else if len(v) == 4 {
+			str += fmt.Sprintf("{Row:%d->%d, Row:%d->%d}\n", v[0], v[1], v[2], v[3])
+		} else {
+			log.Error("====> bad step, %+v", v)
+		}
+	}
+
+	log.Info("use time: %v, _rows:%+v _dices:%+v cnt:%+v %+v", time.Since(start).Milliseconds(), _rows, _dices, len(ret), str)
 	return
 }
 
-func Permute(nums []int32, k int) [][]int32 {
-	var res [][]int32
-	if len(nums) == 0 {
-		return res
+func Permute(_rows []int32, _dices []int32) [][]int32 {
+	if len(_rows) == 0 {
+		return nil
 	}
+	if len(_dices) == 0 {
+		return nil
+	}
+	var res [][]int32
 	var tmp []int32
-	var visited = make([]bool, len(nums))
-	backtracking(nums, k, &res, tmp, visited)
+	var visited = make([]bool, len(_dices))
+	backtracking(_rows, _dices, &res, tmp, visited)
 	return res
 }
 
-func backtracking(nums []int32, k int, res *[][]int32, tmp []int32, visited []bool) {
+func backtracking(_rows []int32, _dices []int32, res *[][]int32, tmp []int32, visited []bool) {
 	// 成功找到一组
-	if len(tmp) == k /*len(nums)*/ {
+	if len(tmp) == len(_dices) || len(tmp)/2 == len(_dices) {
 		var c = make([]int32, len(tmp))
 		copy(c, tmp)
 		*res = append(*res, c)
-		return
+		if len(tmp)/2 == len(_dices) {
+			return
+		}
 	}
+
 	// 回溯
-	for i := 0; i < len(nums); i++ {
-		//if !visited[i] {
-		//	visited[i] = true
+	for j := 0; j < len(_dices); j++ {
 
-		//能够移动？
-		//if !checkCanMove() {
-		//	continue
-		//}
-		//尝试移动一次
-		//moveOne()
+		for i := 0; i < len(_rows); i++ {
 
-		tmp = append(tmp, nums[i])
-		backtracking(nums, k, res, tmp, visited)
-		tmp = tmp[:len(tmp)-1]
+			if !visited[j] {
+				visited[j] = true
 
-		//回退之前移动的位置
-		//backOne()
+				//剪枝
+				//能够移动?
+				//if !checkCanMove() {
+				//	continue
+				//}
+				//尝试移动一次
+				//moveOne()
+				
+				tmp = append(tmp, _rows[i], _dices[j])
+				backtracking(_rows, _dices, res, tmp, visited)
+				tmp = tmp[:len(tmp)-2]
 
-		//	visited[i] = false
-		//}
+				//回退之前移动的位置
+				//backOne()
+
+				visited[j] = false
+
+			}
+
+		}
 	}
 }
