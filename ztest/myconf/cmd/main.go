@@ -3,9 +3,10 @@ package main
 import (
 	"flag"
 
+	"class/ztest/myconf/internel/config"
+
 	"github.com/go-kratos/kratos/pkg/conf/paladin"
 	"github.com/go-kratos/kratos/pkg/log"
-	"class/ztest/myconf/internel/config"
 )
 
 func main() {

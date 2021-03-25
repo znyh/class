@@ -6,6 +6,7 @@ require (
 	github.com/astaxie/bee v1.8.3 // indirect
 	github.com/astaxie/beego v1.12.3
 	github.com/beego/beego/v2 v2.0.1 // indirect
+	github.com/coreos/etcd v3.3.25+incompatible
 	github.com/garyburd/redigo v1.6.0
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-kratos/kratos v1.0.0
