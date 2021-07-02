@@ -12,7 +12,7 @@ func TestPermute(t *testing.T) {
 	var (
 		start   = time.Now()
 		_rows   = []int32(nil)
-		_dices  = []int32{-1, -2} //2个色子
+		_dices  = []int32{-2, -2} //2个色子
 		_maxCnt = 2               //15个chess
 	)
 
@@ -53,10 +53,13 @@ func Permute(_rows []int32, _dices []int32) [][]int32 {
 
 func backtracking(_rows []int32, _dices []int32, res *[][]int32, tmp []int32, visited []bool) {
 	// 成功找到一组
-	if len(tmp) == len(_dices) || len(tmp)/2 == len(_dices) {
+	if len(tmp) == len(_dices) || len(tmp)/2 == len(_dices) || (len(tmp)/4 == len(_dices) && _dices[0] == _dices[1]) {
 		var c = make([]int32, len(tmp))
 		copy(c, tmp)
 		*res = append(*res, c)
+		if len(tmp)/4 == len(_dices) && _dices[0] == _dices[1] {
+			return
+		}
 		if len(tmp)/2 == len(_dices) {
 			return
 		}
@@ -77,7 +80,7 @@ func backtracking(_rows []int32, _dices []int32, res *[][]int32, tmp []int32, vi
 				//}
 				//尝试移动一次
 				//moveOne()
-				
+
 				tmp = append(tmp, _rows[i], _dices[j])
 				backtracking(_rows, _dices, res, tmp, visited)
 				tmp = tmp[:len(tmp)-2]
